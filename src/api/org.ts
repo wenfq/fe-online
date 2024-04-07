@@ -1,26 +1,47 @@
-import delay from '../utils/delay'
-interface Org {
-  id: string
-  name: string
-}
-const getOrgData = (): Org[] => {
-  const count = Math.floor(Math.random() * 20)
-  return Array(count)
-    .fill(0)
-    .map(() => {
-      return {
-        id: Math.random() + '',
-        name: (Math.random() + 1).toString(36).substring(7),
-      }
-    })
-}
+// api.ts
+// @ts-ignore
+import { Department } from './organization-types';
 
-const query = (parentId: string = '0') => {
-  return delay(getOrgData())
-}
-
-const orgApi = {
-  query,
-}
-
-export default orgApi
+// 模拟 API 调用获取部门数据
+export const getDepartments = async (): Promise<Department[]> => {
+    // 这里是模拟数据，实际应用中应该从后端 API 获取
+    const departments: Department[] = [
+        {
+            "id": 1,
+            "name": "总公司",
+            "children": [
+                {
+                    "id": 2,
+                    "name": "研发部门",
+                },
+                {
+                    "id": 3,
+                    "name": "市场部门"
+                },
+                {
+                    "id": 4,
+                    "name": "人事部门",
+                },
+                {
+                    "id": 5,
+                    "name": "总经办",
+                },
+            ]
+        },
+        {
+            "id": 6,
+            "name": "分公司",
+            "children": [
+                {
+                    "id": 7,
+                    "name": "销售团队"
+                },
+                {
+                    "id": 8,
+                    "name": "客服团队"
+                }
+            ]
+        }
+    ]
+    return Promise.resolve(departments);
+};
